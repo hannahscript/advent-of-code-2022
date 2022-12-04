@@ -1,6 +1,7 @@
 extern crate core;
 
 mod days;
+mod utility;
 
 fn main() {
     days::day01::solve();

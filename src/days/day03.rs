@@ -1,5 +1,5 @@
 use std::collections::{HashMap, HashSet};
-use std::fs::{File, read_to_string};
+use std::fs::{File};
 use std::io::{BufRead, BufReader};
 
 fn read_input() -> Vec<String> {
@@ -67,14 +67,13 @@ fn solve_part2(rucksacks: &Vec<String>) -> u32 {
     let mut count: HashMap<char, u32> = HashMap::new();
     let mut i = 0;
     let mut sum = 0;
-    let mut badge = '?';
+    let mut badge;
 
     for rucksack in rucksacks {
         badge = count_letters(rucksack, &mut count);
 
         if i % 3 == 2 {
             count.clear();
-            println!("Badge in group {}: {}", i / 3, badge);
             sum += get_letter_priority(badge);
         }
 

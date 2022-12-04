@@ -1,23 +1,12 @@
-use std::collections::{HashMap, HashSet};
-use std::fs::{read_to_string};
+use super::super::utility::utils::parse_file;
 
 type Range = (i32, i32);
 
 fn read_input() -> Vec<(Range, Range)> {
-    let contents = match read_to_string("inputs/day04.txt") {
-        Ok(contents) => contents,
-        Err(error) => panic!("Can't open file: {:?}", error)
-    };
-    let lines = contents.split("\r\n");
-
-    let mut result: Vec<(Range, Range)> = Vec::new();
-    for line in lines {
-        if line.is_empty() {continue};
+    parse_file("inputs/day04.txt", |line| {
         let elves: Vec<&str> = line.split(",").collect();
-        result.push((parse_range(elves[0]), parse_range(elves[1])));
-    }
-
-    result
+        (parse_range(elves[0]), parse_range(elves[1]))
+    })
 }
 
 fn parse_range(text: &str) -> Range {
@@ -35,7 +24,6 @@ fn overlaps(a: Range, b: Range) -> bool {
 
 pub fn solve() {
     let input = read_input();
-    println!("{:?}", input);
     let part1 = solve_part1(&input);
     let part2 = solve_part2(&input);
 
