@@ -151,7 +151,7 @@ pub fn solve() {
     let part1 = solve_part1(&fsystem);
     let part2 = solve_part2(&fsystem);
     
-    println!("Day 06");
+    println!("Day 07");
     println!("Part 1: {}", part1);
     println!("Part 2: {}", part2);
 }
