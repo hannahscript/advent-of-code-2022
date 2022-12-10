@@ -1,4 +1,3 @@
-use std::fmt::Display;
 use crate::utility::utils::parse_file;
 
 fn read_input() -> Vec<Vec<u32>> {
@@ -9,8 +8,6 @@ fn read_input() -> Vec<Vec<u32>> {
 
 pub fn solve() {
     let input = read_input();
-    print_trees(&input);
-    println!();
 
     let part1 = solve_part1(&input);
     let part2 = solve_part2(&input);
@@ -18,15 +15,6 @@ pub fn solve() {
     println!("Day 08");
     println!("Part 1: {}", part1);
     println!("Part 2: {}", part2);
-}
-
-fn print_trees<T >(trees: &Vec<Vec<T>>) where T: Display {
-    for y in 0..trees.len() {
-        for x in 0..trees.len() {
-            print!("{} ", trees[y][x]);
-        }
-        println!();
-    }
 }
 
 fn solve_part1(trees: &Vec<Vec<u32>>) -> usize {
@@ -73,9 +61,7 @@ fn solve_part1(trees: &Vec<Vec<u32>>) -> usize {
             }
         }
     }
-
-    //println!();
-    //print_trees(&vis);
+    
     vis.iter().map(|row| row.into_iter().filter(|c| **c > 0).count()).sum::<usize>() + 2 * dim + 2 * (dim - 2)
 }
 
@@ -132,7 +118,6 @@ fn solve_part2(trees: &Vec<Vec<u32>>) -> usize {
             scores[y][x] = get_view_dist(&trees, x, y);
         }
     }
-
-    print_trees(&scores);
+    
     *scores.iter().map(|row| row.iter().max().unwrap()).max().unwrap()
 }
