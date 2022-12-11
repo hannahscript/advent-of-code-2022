@@ -12,6 +12,7 @@ This year I am learning and using [Rust](https://www.rust-lang.org). There were 
 - Day 07: ⭐ ⭐
 - Day 08: ⭐ ⭐
 - Day 09: ⭐ ⭐
+- Day 10: ⭐ ⭐
 - Day 10: ✰ ✰
 
 ... 👩‍💻❤️🦀
