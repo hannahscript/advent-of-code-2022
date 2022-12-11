@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 regex = "1.5.5"
+num-bigint = "0.4.3"
+num-integer = "0.1.45"
