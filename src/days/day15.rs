@@ -52,7 +52,7 @@ fn get_range(reading: &SensorReading, y: i32) -> (i32, i32) {
     let taxi_dist = get_taxi_dist(&reading);
     let r = max(0, taxi_dist - y_dist);
 
-    (reading.sensor.0-r, reading.sensor.0+r+1) // +1 cause end exclusive
+    (reading.sensor.0-r, reading.sensor.0+r) // +1 cause end exclusive
 }
 
 fn merge_range(range: (i32, i32), other: (i32, i32)) -> (i32, i32) {
@@ -74,12 +74,12 @@ fn combine_ranges(mut r: (i32, i32), ranges: &mut Vec<(i32, i32)>) {
     let mut merge_end: i32 = -1;
     for i in 0..ranges.len() {
         let current = ranges[i];
-        if r.1 < current.0 {
+        if r.1 - current.0 < -1 {
             if merge_start < 0 {
                 ranges.insert(i, r);
             }
             break;
-        } else if r.0 > current.1 {
+        } else if r.0 - current.1 > 1 {
             if i == ranges.len() - 1 {
                 ranges.push(r);
             }
@@ -160,7 +160,7 @@ pub fn solve() {
     let elapsed = SystemTime::now();
     let mut input = read_input();
 
-    test_cr();
+    //test_cr();
     
     let part1 = solve_part1(&input);
     let part2 = solve_part2(&input);
@@ -176,7 +176,7 @@ fn solve_part1(readings: &Vec<SensorReading>) -> i32 {
     for r in readings {
         get_spots(&r, 2000000, &mut ranges);
     }
-    ranges.iter().map(|r| r.1 - r.0).sum()
+    ranges.iter().map(|r| r.1 - r.0 + 1).sum()
 }
 
 fn solve_part2(readings: &Vec<SensorReading>) -> u64 {
@@ -188,7 +188,6 @@ fn solve_part2(readings: &Vec<SensorReading>) -> u64 {
         }
         //println!("{:?}", ranges);
         if ranges.len() > 1 {
-            //println!("{}, {:?}", y, ranges);
             return (ranges[0].1 + 1) as u64 * 4_000_000 + y as u64;
         }
     }
